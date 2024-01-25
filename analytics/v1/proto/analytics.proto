@@ -1,0 +1,36 @@
+syntax="proto3";
+
+option go_package = "codegen/pb";
+
+import "google/protobuf/empty.proto";
+
+
+message GetTotalSalesResponse{
+  double amount=1;
+}
+
+message GetProductRequest{
+  string product_id = 1;
+}
+
+message GetSalesByProductResponse{
+  int32 quantity =1;
+  double amount = 2;
+  string product_id = 3;
+}
+
+message CustomerStats {
+  string customer_id = 1;
+  int32 total_quantity = 2;
+  double total_amount = 3;
+}
+
+message GetTopCustomersResponse{
+  repeated CustomerStats stats=1;
+}
+
+service Analytics{
+  rpc GetTotalSales(google.protobuf.Empty) returns (GetTotalSalesResponse);
+  rpc GetSalesByProduct(GetProductRequest) returns (GetSalesByProductResponse);
+  rpc GetTopCustomers(google.protobuf.Empty) returns (GetTopCustomersResponse);
+}
