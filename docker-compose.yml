@@ -1,0 +1,20 @@
+services:
+  cockroach:
+    container_name: cockroach
+    image: cockroachdb/cockroach:latest-v23.1
+    ports:
+      - "26257:26257"
+    command: start-single-node --insecure
+    healthcheck:
+      test: ["CMD", "COCKROACH", "SQL", "--insecure", "-e", "SELECT NOW();"]
+      interval: 1s
+      timeout: 10s
+      retries: 10
+#  ecommerce:
+#    build: .
+#    image: tweeq/ecommerce:latest
+#    ports:
+#      - 8081:8081
+#    depends_on:
+#      - cockroach
+
