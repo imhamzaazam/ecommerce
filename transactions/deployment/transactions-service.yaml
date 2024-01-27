@@ -1,14 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: db
-  labels:
-    name: cockroach-service
-    app: ecommerce-app
+  name: transaction-service
 spec:
+  type: NodePort
   ports:
-    - port: 5432
-      targetPort: 5432
+    - port: 8081
+      targetPort: 8081
+      nodePort: 8081
   selector:
-    name: cockroach-pod
+    name: transaction-pod
     app: ecommerce-app

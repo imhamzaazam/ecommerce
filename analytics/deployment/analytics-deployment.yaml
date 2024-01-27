@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: analytics-deployment
+  labels:
+    name: analytics-deploy
+    app: ecommerce-app
+spec:
+  selector:
+    matchLabels:
+      name: analytics-deploy
+  template:
+    metadata:
+      labels:
+        app: ecommerce-deployment
+    spec:
+      containers:
+        - name: analytics
+          image: analytics
+          ports:
+            - containerPort: 8080

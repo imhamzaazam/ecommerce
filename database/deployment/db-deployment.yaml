@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cockroach-deploy
+  labels:
+    name: cockroach-deploy
+    app: ecommerce-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: cockroach-pod
+      app: ecommerce-app
+  template:
+    metadata:
+      name: cockroach-pod
+      labels:
+        name: cockroach-pod
+        app: ecommerce-app
+    spec:
+      containers:
+        - name: cockroach
+          image: cockroachdb/cockroach:latest-v23.1
+          ports:
+            - containerPort: 26257
+          command: ["start-single-node", "--insecure"]
