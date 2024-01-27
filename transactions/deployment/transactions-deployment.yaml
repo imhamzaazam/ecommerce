@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transactions-deploy
+  labels:
+    name: transactions-deploy
+    app: ecommerce-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: transaction-pod
+      app: ecommerce-app
+  template:
+    metadata:
+      name: transaction-pod
+      labels:
+        name: transaction-pod
+        app: ecommerce-app
+    spec:
+      containers:
+        - name: transactions
+          image: transactions
+          ports:
+            - containerPort: 8081
